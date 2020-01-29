@@ -47,7 +47,7 @@
 
 + (NSString *)commentCountKey
 {
-    return @"num_communts";
+    return @"num_comments";
 }
 
 @end
