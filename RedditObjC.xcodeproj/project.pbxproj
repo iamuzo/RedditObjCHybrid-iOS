@@ -18,6 +18,7 @@
 		0F2816C223E11E6E006917B2 /* MySimpleRedditPostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2816C123E11E6E006917B2 /* MySimpleRedditPostController.m */; };
 		0F2816C623E12853006917B2 /* MySimpleRedditPostsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2816C523E12853006917B2 /* MySimpleRedditPostsSearchTableViewController.swift */; };
 		0F2816C823E12946006917B2 /* MySimpleRedditPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2816C723E12946006917B2 /* MySimpleRedditPostTableViewCell.swift */; };
+		0FCF97DA23E20CF1003C43CA /* MySimpleRedditPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF97D923E20CF1003C43CA /* MySimpleRedditPostDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		0F2816C423E12852006917B2 /* RedditObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RedditObjC-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F2816C523E12853006917B2 /* MySimpleRedditPostsSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySimpleRedditPostsSearchTableViewController.swift; sourceTree = "<group>"; };
 		0F2816C723E12946006917B2 /* MySimpleRedditPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySimpleRedditPostTableViewCell.swift; sourceTree = "<group>"; };
+		0FCF97D923E20CF1003C43CA /* MySimpleRedditPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySimpleRedditPostDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				0F2816C523E12853006917B2 /* MySimpleRedditPostsSearchTableViewController.swift */,
 				0F2816C423E12852006917B2 /* RedditObjC-Bridging-Header.h */,
 				0F2816C723E12946006917B2 /* MySimpleRedditPostTableViewCell.swift */,
+				0FCF97D923E20CF1003C43CA /* MySimpleRedditPostDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				0F2816C223E11E6E006917B2 /* MySimpleRedditPostController.m in Sources */,
 				0F2816C623E12853006917B2 /* MySimpleRedditPostsSearchTableViewController.swift in Sources */,
 				0F28169423E112D4006917B2 /* AppDelegate.m in Sources */,
+				0FCF97DA23E20CF1003C43CA /* MySimpleRedditPostDetailViewController.swift in Sources */,
 				0F2816C823E12946006917B2 /* MySimpleRedditPostTableViewCell.swift in Sources */,
 				0F2816BE23E11371006917B2 /* MySimpleRedditPost.m in Sources */,
 				0F2816A523E112D6006917B2 /* main.m in Sources */,

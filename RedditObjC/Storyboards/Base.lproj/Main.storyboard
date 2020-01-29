@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RrC-nr-Hjm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSZ-0X-3EO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -62,6 +63,7 @@
                                     <outlet property="postCommentCountLabel" destination="Xmd-6q-XhB" id="BS0-Ha-cbv"/>
                                     <outlet property="postTitleLabel" destination="H3I-xc-Sao" id="tJn-To-Bsq"/>
                                     <outlet property="postUpCountLabel" destination="bhb-Js-aU4" id="l9p-BY-LDT"/>
+                                    <segue destination="yPH-Fg-aKO" kind="show" identifier="displayPostDetail" id="j22-e9-5n7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -70,11 +72,72 @@
                             <outlet property="delegate" destination="RrC-nr-Hjm" id="4Zs-tX-duS"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="q23-Lo-ggW"/>
                     <connections>
                         <outlet property="mySimpleRedditPostsSearchBar" destination="e0Q-k2-KnQ" id="w62-ia-xmU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9n-Yl-tdp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768.11594202898561" y="15.401785714285714"/>
+        </scene>
+        <!--My Simple Reddit Post Detail View Controller-->
+        <scene sceneID="2Fb-qO-GK4">
+            <objects>
+                <viewController id="yPH-Fg-aKO" customClass="MySimpleRedditPostDetailViewController" customModule="RedditObjC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U9M-Nx-kVE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCn-bP-2MC">
+                                <rect key="frame" x="51" y="319" width="312" height="312"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NCn-bP-2MC" secondAttribute="height" multiplier="1:1" id="oSk-q2-PAF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2AW-BN-eyG">
+                                <rect key="frame" x="41.5" y="655" width="331" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="NCn-bP-2MC" firstAttribute="centerX" secondItem="U9M-Nx-kVE" secondAttribute="centerX" id="Dor-zb-2yG"/>
+                            <constraint firstItem="NCn-bP-2MC" firstAttribute="top" secondItem="LcZ-HU-N0T" secondAttribute="top" constant="231" id="Err-Kx-Tts"/>
+                            <constraint firstItem="2AW-BN-eyG" firstAttribute="top" secondItem="NCn-bP-2MC" secondAttribute="bottom" constant="24" id="afj-5j-Osb"/>
+                            <constraint firstItem="2AW-BN-eyG" firstAttribute="width" secondItem="LcZ-HU-N0T" secondAttribute="width" multiplier="0.8" id="cr7-Yt-oSl"/>
+                            <constraint firstItem="NCn-bP-2MC" firstAttribute="centerX" secondItem="2AW-BN-eyG" secondAttribute="centerX" id="hAG-Ed-U3t"/>
+                            <constraint firstItem="NCn-bP-2MC" firstAttribute="centerY" secondItem="LcZ-HU-N0T" secondAttribute="centerY" id="mS7-6C-D8q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LcZ-HU-N0T"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aFP-QL-9j9"/>
+                    <connections>
+                        <outlet property="postImageView" destination="NCn-bP-2MC" id="j0J-kD-d1H"/>
+                        <outlet property="postTitleLabel" destination="2AW-BN-eyG" id="o3Y-qq-wLz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gqH-h9-Y9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1813.0434782608697" y="14.732142857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l6k-H3-hQ1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lSZ-0X-3EO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XKL-mq-ELQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RrC-nr-Hjm" kind="relationship" relationship="rootViewController" id="o8P-lv-saK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CzR-mI-XYv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-139.13043478260872" y="15.401785714285714"/>
         </scene>

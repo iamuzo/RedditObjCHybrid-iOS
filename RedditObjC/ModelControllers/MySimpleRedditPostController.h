@@ -6,7 +6,7 @@
 //  Copyright © 2020 Uzo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class MySimpleRedditPost;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,11 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //first add Global Shared Instance
+//-(instancetype)sharedInstance;
 + (MySimpleRedditPostController *)sharedInstance;
 
 //Next go get our information
 - (void)searchForPostWithSearchTerm:(NSString *)searchTerm
-                         completion:(void (^) (NSArray<MySimpleRedditPost *> *posts, NSError * _Nullable error))completion;
+                         completion:(void (^) (NSArray<MySimpleRedditPost *> *posts,
+                                               NSError * _Nullable error))completion;
+
+- (void)fetchImageForPost:(MySimpleRedditPost *)post completion:(void (^) (UIImage * _Nullable))completion;
 @end
 
 NS_ASSUME_NONNULL_END

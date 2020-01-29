@@ -15,11 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, readonly) NSInteger ups;
 @property (nonatomic, readonly) NSNumber *commentCount;
+@property (nonatomic, readonly) NSString *thumbnail;
 /// NSInterger is good for Mathematical operations (use primitives)
 /// if just getting information that is integer, use NSNumber
 
 - (instancetype)initWithTitle:(NSString *)title
                            ups:(NSInteger)ups
+                    thumbnail:(NSString *)thumbnail
                  commentCount:(NSNumber *)commentCount;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

@@ -13,10 +13,9 @@
 @implementation MySimpleRedditPostController
 
 // MARK: - Properties
-- (NSURL *)baseURL
-{
-    return [NSURL URLWithString:@"https://reddit.com/r/"];
-}
+static NSString *const baseURL = @"https://reddit.com";
+static NSString *const rComponentString = @"r";
+static NSString *const jsonExtension = @"json";
 
 + (MySimpleRedditPostController *)sharedInstance
 {
@@ -30,11 +29,14 @@
 
 - (void)searchForPostWithSearchTerm:(NSString *)searchTerm completion:(void (^)(NSArray<MySimpleRedditPost *> *, NSError *))completion
 {
-    NSURL *searchURL = [self baseURL];
-    searchURL = [searchURL URLByAppendingPathComponent:searchTerm];
-    searchURL = [searchURL URLByAppendingPathExtension:@"json"];
     
-    [[[NSURLSession sharedSession] dataTaskWithURL:searchURL
+    NSURL * url = [NSURL URLWithString:baseURL];
+    NSURL * rURL = [url URLByAppendingPathComponent:rComponentString];
+    NSURL * searchURL = [rURL URLByAppendingPathComponent:searchTerm];
+    NSURL * finalURL = [searchURL URLByAppendingPathExtension:jsonExtension];
+    NSLog(@"this is the finalURL: %@", finalURL);
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL
                                  completionHandler:^(NSData * data,
                                                      NSURLResponse * response,
                                                      NSError * error)
@@ -51,16 +53,16 @@
             return;
         }
     
-    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    NSDictionary *topLevelDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     
-    if (!jsonDictionary || ![jsonDictionary isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"Error with jsonDictionary: %@", error);
+    if (!topLevelDictionary || ![topLevelDictionary isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"Error with topLevelDictionary: %@", error);
         completion(nil, error);
         return;
     }
     
-    NSDictionary *redditPostDictionaries = jsonDictionary[@"data"];
-    NSArray *childrenArray = redditPostDictionaries[@"children"];
+    NSDictionary *redditDataDictionary = topLevelDictionary[@"data"];
+    NSArray *childrenArray = redditDataDictionary[@"children"];
     
     //we need to return an array of Reddit Posts
     NSMutableArray *arrayOfRedditPosts = [NSMutableArray array];
@@ -69,8 +71,56 @@
         MySimpleRedditPost *post = [[MySimpleRedditPost alloc] initWithDictionary:dataDictionary];
         [arrayOfRedditPosts addObject:post];
     }
+    
+//    if (arrayOfRedditPosts.count != 0) {
+//        //MySimpleRedditPostController.sharedInstance.posts  = arrayOfRedditPosts
+//        //completion(true);
+//    } else {
+//        //completion(false)
+//    }
+    
+    //if I add the if else above then comment this out 
     completion(arrayOfRedditPosts, nil);
     
     }] resume];
+}
+
+- (void)fetchImageForPost:(MySimpleRedditPost *)post completion:(void (^)(UIImage * _Nullable))completion
+
+{
+    // if url then fetch
+    // else return default image
+    NSString *imageURL = post.thumbnail;
+    
+    
+    if ([imageURL  isEqual: @"default"]) {
+        //I want to display a default image. For now
+        //using a system image but will change later
+        //maybe another fetch to unsplash api
+        UIImage *image = [UIImage systemImageNamed:@"rays"];
+        completion(image);
+    } else {
+        NSURL *fetchImageURL = [NSURL URLWithString:imageURL];
+        NSLog(@"This is the fetchImageURL: %@", fetchImageURL);
+        
+        [[[NSURLSession sharedSession] dataTaskWithURL:fetchImageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            //handle error
+            if (error) {
+                
+                NSLog(@"Error fetching reddit post from server: %@", error);
+                completion(nil); return;
+            }
+            
+            if (data) {
+                UIImage *image = [UIImage imageWithData:data];
+                completion(image);
+            } else {
+                // this is where you display a default image
+                UIImage *image = [UIImage systemImageNamed:@"rays"];
+                completion(image);
+            }
+        }] resume];
+    }
 }
 @end

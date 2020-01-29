@@ -12,12 +12,14 @@
 
 -(instancetype)initWithTitle:(NSString *)title
                          ups:(NSInteger)ups
+                   thumbnail:(NSString *)thumbnail
                 commentCount:(NSNumber *)commentCount
 {
     self = [super init];
     if (self) {
         _title = [title copy];
-        _ups = ups ;
+        _ups = ups;
+        _thumbnail = thumbnail;
         _commentCount = [commentCount copy];
     }
     return self;
@@ -33,9 +35,11 @@
     //define your properties that come from the JSON
     NSString *title = dataDictionary[@"title"];
     NSInteger ups = [dataDictionary[[MySimpleRedditPost ups]] intValue];
+    NSString *thumbnail = dataDictionary[@"thumbnail"];
     NSNumber *commentCount = dataDictionary[[MySimpleRedditPost commentCountKey]];
     
-    return [self initWithTitle:title ups:ups commentCount:commentCount];
+    //return [self initWithTitle:title ups:ups commentCount:commentCount];
+    return [self initWithTitle:title ups:ups thumbnail:thumbnail commentCount:commentCount];
 }
 
 // MARK: - Keys
